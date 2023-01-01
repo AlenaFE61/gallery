@@ -23,24 +23,12 @@ import { galleryItems } from './gallery-items.js';
   if(target.nodeName !=='IMG'){
     return;
   }
-  onUrlClick(selectedUrl);
+  const instance = basicLightbox.create(`
+    <img src="${selectedUrl}" width="800" height="600">
+`)
+
+    instance.show()
  }
 
  gallery.addEventListener("click", onGalleryClick);
- let intance = null;
 
- function OnUrlClose(event){
-  if(event.code ==="Escape") {
-    intance.close();
-    console.log(event.code);
-    document.removeEventListener("keydown", OnUrlClose);
-  }
- }
-
- function onUrlClick(url){
-  intance = basicLightbox.create(
-    `<img src = "${url}`,
-    { onShow: document.addEventListener("keydown", OnUrlClose)}
-  );
-  intance.show();
- }
